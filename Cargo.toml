@@ -1,0 +1,30 @@
+[package]
+name = "rust_backend_template"
+version = "0.1.0"
+authors = ["William Karkegi"]
+edition = "2021"
+publish = false
+
+[workspace]
+members = [".", "entity", "migration"]
+
+[dependencies]
+# Workspace
+entity = { path = "entity" }
+migration = { path = "migration" }
+# Async
+tokio = { version = "1", features = ["full"] }
+# Web
+axum = "0.6.20"
+# Json
+serde = { version = "1", features = ["derive"] }
+serde_json = "1.0"
+# Orm
+sea-orm = { version = "0.12.6", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros", "with-chrono"] }
+# Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+# Env
+dotenv = "0.15.0"
+# Other
+strum_macros = "0.25.3"

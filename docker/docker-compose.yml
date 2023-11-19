@@ -1,0 +1,16 @@
+name: "backend"
+
+version: "3.3"
+
+services:
+  database:
+    image: "postgres:13.10-alpine"
+    environment:
+      - POSTGRES_DB=backend
+      - POSTGRES_USER=backend
+      - POSTGRES_PASSWORD=backend
+    volumes:
+      - ./volumes/database:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "5454:5432"
