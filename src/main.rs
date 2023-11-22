@@ -1,23 +1,17 @@
 use std::{env, net::SocketAddr};
 
-use app_state::AppState;
 use axum::{
     middleware,
     response::{IntoResponse, Response},
     Json, Router, Server,
 };
-use db::DB;
 use dotenv::dotenv;
-use error::Error;
 use serde_json::json;
 use tracing::{debug, info};
 
-mod app_state;
-mod ctx;
-mod db;
-mod error;
+mod shared;
 
-use crate::error::Result;
+use crate::shared::{app_state::AppState, db::DB, error::Error, error::Result};
 
 #[tokio::main]
 async fn main() -> Result<()> {
