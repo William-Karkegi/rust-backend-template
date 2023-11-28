@@ -3,10 +3,11 @@ use std::{env, net::SocketAddr};
 use axum::{
     middleware,
     response::{IntoResponse, Response},
-    Json, Router, Server,
+    Json, Router,
 };
 use dotenv::dotenv;
 use serde_json::json;
+use tokio::net::TcpListener;
 use tracing::{debug, info};
 
 mod shared;
@@ -31,14 +32,11 @@ async fn main() -> Result<()> {
         .layer(middleware::map_response(main_response_mapper))
         .with_state(state);
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 8080));
+    let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
 
-    info!("Listening on {addr}");
+    info!("Listening on: {}", listener.local_addr().unwrap());
 
-    Server::bind(&addr)
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    axum::serve(listener, app).await.unwrap();
 
     return Ok(());
 }
