@@ -15,16 +15,16 @@ migration = { path = "migration" }
 # Async
 tokio = { version = "1", features = ["full"] }
 # Web
-axum = "0.7.1"
+axum = "0.7"
 # Json
 serde = { version = "1", features = ["derive"] }
 serde_json = "1.0"
 # Orm
-sea-orm = { version = "0.12.6", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros", "with-chrono"] }
+sea-orm = { version = "0.12", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros", "with-chrono"] }
 # Tracing
 tracing = "0.1"
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # Env
-dotenv = "0.15.0"
+dotenv = "0.15"
 # Other
-strum_macros = "0.25.3"
+strum_macros = "0.25"
