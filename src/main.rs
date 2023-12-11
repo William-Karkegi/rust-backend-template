@@ -1,5 +1,3 @@
-use std::{env, net::SocketAddr};
-
 use axum::{
     middleware,
     response::{IntoResponse, Response},
@@ -7,7 +5,9 @@ use axum::{
 };
 use dotenv::dotenv;
 use serde_json::json;
+use std::env;
 use tokio::net::TcpListener;
+use tower_http::cors::CorsLayer;
 use tracing::{debug, info};
 
 mod shared;
@@ -30,6 +30,7 @@ async fn main() -> Result<()> {
     let app = Router::new()
         .route("/", axum::routing::get(|| async { "Hello, World!" }))
         .layer(middleware::map_response(main_response_mapper))
+        .layer(CorsLayer::very_permissive())
         .with_state(state);
 
     let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
